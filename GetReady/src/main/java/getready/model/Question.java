@@ -1,5 +1,6 @@
 package getready.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -45,7 +46,15 @@ public class Question {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	
-	
 
+	public List<Label> getLabels() {
+		if(labels == null)
+			labels = new ArrayList<>();
+		return labels;
+	}
+
+	public void setLabels(List<Label> labels) {
+		this.labels = labels;
+	}
+	
 }
