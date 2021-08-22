@@ -9,7 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Question {
@@ -23,7 +23,7 @@ public class Question {
 	@Column(columnDefinition = "TEXT")
 	private String answer;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Label> labels;
 	
 	public Question() {}

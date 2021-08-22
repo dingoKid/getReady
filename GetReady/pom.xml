@@ -12,7 +12,7 @@
 	<groupId>getready</groupId>
 	<artifactId>GetReady</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>GetReady</name> 
+	<name>GetReady</name>
 	<description>Application to help you learn</description>
 	<properties>
 		<java.version>11</java.version>
@@ -56,6 +56,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		
 	</dependencies>
