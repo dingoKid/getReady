@@ -28,4 +28,6 @@ public interface QuestionMapper {
 				.map(label -> label.getName())
 				.collect(Collectors.toList());
 	}
+
+	List<QuestionDto> questionsToDtos(List<Question> questions);
 }

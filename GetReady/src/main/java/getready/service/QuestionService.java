@@ -2,11 +2,13 @@ package getready.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import getready.dto.QuestionDto;
@@ -43,6 +45,10 @@ public class QuestionService {
 		return questionsWithLabel.get(randomIndex);
 	}
 	
+	public List<Question> findByQuestion(String word) {
+		return questionRepository.findByQuestionContaining(word);
+	}
+	
 	@Transactional
 	public void saveQuestion(QuestionDto questionDto) {
 		List<Label> labels = new ArrayList<>();
@@ -55,5 +61,25 @@ public class QuestionService {
 		question.setLabels(labels);		
 		questionRepository.save(question);
 	}
-
+	
+	public List<Question> getByLabels(List<String> labelNames) {
+		List<Label> labels = new ArrayList<>();
+		for (String labelName : labelNames) {
+			Optional<Label> label = labelRepository.findByName(labelName);
+			if(label.isPresent()) labels.add(label.get());
+		}
+		
+		Specification<Question> spec = Specification.where(null);
+		
+		for (Label label: labels) {
+			spec = spec.or(QuestionSpecifications.withLabel(label));
+		}
+		
+		return questionRepository.findAll(spec);
+	}
+	
+	public Question getRandomQuestionFromList(List<Question> list) {
+		
+	}
+	
 }
