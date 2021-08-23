@@ -5,8 +5,6 @@ import java.util.List;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class QuestionDto {
 	
 	@NotBlank
@@ -16,7 +14,6 @@ public class QuestionDto {
 	private String answer;
 	
 	@NotEmpty
-	@JsonIgnore
 	private List<String> labels;
 	
 

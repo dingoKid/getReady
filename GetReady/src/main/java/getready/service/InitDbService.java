@@ -28,32 +28,32 @@ public class InitDbService {
 		labelRepository.save(new Label("annotaion"));
 		labelRepository.save(new Label("java"));
 		labelRepository.save(new Label("spring"));
-		labelRepository.save(new Label("web#"));
+		labelRepository.save(new Label("web"));
 	}
 	
 	@Transactional
 	public void addQuestions() {
-		Question question1 = new Question();
+		Question q1 = new Question();
 		
-		String ask = "What are the solid principles?";
+		String question = "What are the solid principles?";
 		String answer = "SRP, OCP, LSP, ISP, DIP";
 		List<Label> labels = new ArrayList<>();
 		labels.add(labelRepository.findByName("OOP").get());		
-		question1.setQuestion(ask);
-		question1.setAnswer(answer);
-		question1.setLabels(labels);	
+		q1.setQuestion(question);
+		q1.setAnswer(answer);
+		q1.setLabels(labels);	
 		
-		questionRepository.save(question1);
+		questionRepository.save(q1);
 		
 		Question q2 = new Question();
-		ask = "sss";
+		question = "sss";
 		answer = "kkk";
 		List<Label> l2 = new ArrayList<>();
 		l2.add(labelRepository.findByName("java").get());
 		l2.add(labelRepository.findByName("spring").get());
 		l2.add(labelRepository.findByName("OOP").get());
 		q2.setAnswer(answer);
-		q2.setQuestion(ask);
+		q2.setQuestion(question);
 		q2.setLabels(l2);
 		
 		questionRepository.save(q2);
