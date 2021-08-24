@@ -6,10 +6,13 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import getready.model.AppUser;
 import getready.model.Label;
 import getready.model.Question;
+import getready.repository.AppUserRepository;
 import getready.repository.LabelRepository;
 import getready.repository.QuestionRepository;
 
@@ -22,10 +25,23 @@ public class InitDbService {
 	@Autowired
 	LabelRepository labelRepository;
 	
+	@Autowired
+	AppUserRepository userRepository;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
+	@Transactional
+	public void addUser() {
+		AppUser user = new AppUser("admin", passwordEncoder.encode("adminpass"));
+		userRepository.save(user);
+		
+	}
+	
 	@Transactional
 	public void addLabels() {
 		labelRepository.save(new Label("OOP"));
-		labelRepository.save(new Label("annotaion"));
+		labelRepository.save(new Label("annotation"));
 		labelRepository.save(new Label("java"));
 		labelRepository.save(new Label("spring"));
 		labelRepository.save(new Label("web"));

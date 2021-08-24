@@ -25,7 +25,7 @@ public class LabelController {
 			.collect(Collectors.toList());
 	}
 	
-	@GetMapping("/add/{labelName}")
+	@GetMapping("/save/{labelName}")
 	public List<String> addLabel(@PathVariable String labelName) {
 		labelService.createLabel(labelName);
 		return getLabels();

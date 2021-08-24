@@ -37,16 +37,8 @@ public class QuestionService {
 		return questionRepository.findById(randomId).get();
 	}
 	
-	public Question getRandomQuestionByLabel(String labelName) {
-		Label label = labelRepository.findByName(labelName).get();
-		List<Question> questionsWithLabel = questionRepository.findByLabels(label);
-		Random random = new Random();
-		int randomIndex = random.ints( 0, questionsWithLabel.size() ).findFirst().getAsInt();
-		return questionsWithLabel.get(randomIndex);
-	}
-	
-	public List<Question> findByQuestion(String word) {
-		return questionRepository.findByQuestionContaining(word);
+	public List<Question> findByContainingWord(String word) {
+		return questionRepository.findByQuestionContainingIgnoreCase(word);
 	}
 	
 	@Transactional
@@ -62,24 +54,23 @@ public class QuestionService {
 		questionRepository.save(question);
 	}
 	
-	public List<Question> getByLabels(List<String> labelNames) {
-		List<Label> labels = new ArrayList<>();
-		for (String labelName : labelNames) {
-			Optional<Label> label = labelRepository.findByName(labelName);
-			if(label.isPresent()) labels.add(label.get());
-		}
-		
+	public Question findByLabels(List<String> labelNames) {
 		Specification<Question> spec = Specification.where(null);
 		
-		for (Label label: labels) {
-			spec = spec.or(QuestionSpecifications.withLabel(label));
+		for (String labelName : labelNames) {
+			Optional<Label> label = labelRepository.findByName(labelName);
+			if(label.isPresent()) 
+				spec = spec.or(QuestionSpecifications.withLabel(label.get()));
 		}
 		
-		return questionRepository.findAll(spec);
+		List<Question> questionsWithCurrentLabels = questionRepository.findAll(spec);
+		return getRandomQuestionFromList(questionsWithCurrentLabels);
 	}
 	
 	public Question getRandomQuestionFromList(List<Question> list) {
-		
+		Random random = new Random();
+		int randomIndex = random.ints( 0, list.size() ).findFirst().getAsInt();
+		return list.get(randomIndex);
 	}
 	
 }

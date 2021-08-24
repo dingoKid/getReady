@@ -38,16 +38,6 @@ public class QuestionController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Database is empty!");
 		}
 	}
-		
-//	@GetMapping("/{label}")
-//	public QuestionDto getQuestionByLabel(@PathVariable String label) {
-//		try {
-//			QuestionDto questionDto = questionMapper.questionToDto(questionService.getRandomQuestionByLabel(label));
-//			return questionDto;
-//		} catch (NoSuchElementException | IllegalArgumentException e) {
-//			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Database is empty or label not exist!");
-//		}
-//	}
 	
 	@PostMapping("/save")
 	public void saveQuestion(@RequestBody @Valid QuestionDto question) {
@@ -59,14 +49,14 @@ public class QuestionController {
 	}
 	
 	@GetMapping("/search/{word}")
-	public List<QuestionDto> searchByQuestion(@PathVariable String word) {
-		return questionMapper.questionsToDtos(questionService.findByQuestion(word));
+	public List<QuestionDto> searchByWord(@PathVariable String word) {
+		return questionMapper.questionsToDtos(questionService.findByContainingWord(word));
 	}
 	
 	
 	@PostMapping("/search")
-	public List<QuestionDto> searchByLabels(@RequestBody List<String> labels) {
+	public QuestionDto searchByLabels(@RequestBody List<String> labels) {
 		if(labels.isEmpty()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empty label list!");
-		return questionMapper.questionsToDtos(questionService.getByLabels(labels));
+		return questionMapper.questionToDto(questionService.findByLabels(labels));
 	}
 }

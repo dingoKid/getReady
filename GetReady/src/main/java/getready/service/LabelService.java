@@ -22,7 +22,6 @@ public class LabelService {
 	
 	@Transactional
 	public void createLabel(String name) {
-		System.out.println("service: " + name);
 		if (labelRepository.findByName(name).isEmpty())
 			labelRepository.save(new Label(name));
 	}
