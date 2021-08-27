@@ -22,7 +22,7 @@ public class LabelService {
 	
 	@Transactional
 	public void createLabel(String name) {
-		if (labelRepository.findByName(name).isEmpty())
+		if (!labelRepository.findByName(name).isPresent())
 			labelRepository.save(new Label(name));
 	}
 }
