@@ -15,7 +15,6 @@
 	<name>GetReady</name>
 	<description>Application to help you learn</description>
 	<properties>
-		<java.version>11</java.version>
 		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
 	</properties>
 	<dependencies>
