@@ -21,9 +21,9 @@ public class GetReadyApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		System.out.println("Starting...");
-		initDbService.addUser();
-		initDbService.addLabels();
-		initDbService.addQuestions();
+//		initDbService.addUser();
+//		initDbService.addLabels();
+//		initDbService.addQuestions();
 		System.out.println("Added");
 		
 	}
