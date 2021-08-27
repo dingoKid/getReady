@@ -26,6 +26,9 @@ public class Question {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Label> labels;
 	
+	@Column(columnDefinition = "TEXT")
+	private String info;
+	
 	public Question() {}
 	
 	public Question(String question, String answer, List<Label> labels) {
@@ -67,6 +70,14 @@ public class Question {
 
 	public void setLabels(List<Label> labels) {
 		this.labels = labels;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
 	}
 	
 }

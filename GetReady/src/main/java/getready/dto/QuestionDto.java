@@ -16,6 +16,8 @@ public class QuestionDto {
 	@NotEmpty
 	private List<String> labels;
 	
+	private String info;
+	
 
 	public QuestionDto() { }
 
@@ -47,5 +49,16 @@ public class QuestionDto {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
+
+	public String getInfo() {
+		if(this.info == null) 
+			return "";
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	
 
 }

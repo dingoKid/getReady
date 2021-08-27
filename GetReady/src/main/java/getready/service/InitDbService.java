@@ -52,28 +52,44 @@ public class InitDbService {
 		Question q1 = new Question();
 		
 		String question = "What are the solid principles?";
-		String answer = "SRP, OCP, LSP, ISP, DIP";
+		String answer = "SRP, OCP, LSP, ISP, DIP.";
+		String info = "https://javatechonline.com/solid-principles-the-interface-segregation-principle/?fbclid=IwAR1Hc4-6k-XEDgzm0F3ky8RgAhg8NyjOQsth3at3danntIrqDsJObWIc95Y";
 		List<Label> labels = new ArrayList<>();
 		labels.add(labelRepository.findByName("OOP").get());		
 		q1.setQuestion(question);
 		q1.setAnswer(answer);
-		q1.setLabels(labels);	
+		q1.setLabels(labels);
+		q1.setInfo(info);
 		
 		questionRepository.save(q1);
 		
 		Question q2 = new Question();
-		question = "sss";
-		answer = "kkk";
-		List<Label> l2 = new ArrayList<>();
-		l2.add(labelRepository.findByName("java").get());
-		l2.add(labelRepository.findByName("spring").get());
-		l2.add(labelRepository.findByName("OOP").get());
+		question = "Can you make an abstract class final in Java?";
+		answer = "No.";
+		info = "https://www.java67.com/2017/07/can-you-make-abstract-class-method-final-in-java.html";
+		labels.clear();
+		labels.add(labelRepository.findByName("java").get());
+		labels.add(labelRepository.findByName("OOP").get());
 		q2.setAnswer(answer);
 		q2.setQuestion(question);
-		q2.setLabels(l2);
+		q2.setLabels(labels);
+		q2.setInfo(info);
 		
 		questionRepository.save(q2);
 		
+		Question q3 = new Question();
+		question = "Can you overload or override static methods in Java?";
+		answer = "You can overload but can not override.";
+		info = "https://javarevisited.blogspot.com/2013/03/can-we-overload-and-override-static-method-java.html#axzz74j42eQPf";
+		labels.clear();
+		labels.add(labelRepository.findByName("java").get());
+		labels.add(labelRepository.findByName("OOP").get());
+		q3.setAnswer(answer);
+		q3.setQuestion(question);
+		q3.setLabels(labels);
+		q3.setInfo(info);
+		
+		questionRepository.save(q3);
 		
 	}
 
