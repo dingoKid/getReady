@@ -91,6 +91,21 @@ public class InitDbService {
 		
 		questionRepository.save(q3);
 		
+		Question q4 = new Question();
+		question = "Can you make an Abstract Class or Method Final in Java?";
+		answer = "No.";
+		info = "https://www.java67.com/2017/07/can-you-make-abstract-class-method-final-in-java.html";
+		labels.clear();
+		labels.add(labelRepository.findByName("java").get());
+		labels.add(labelRepository.findByName("OOP").get());
+		q4.setAnswer(answer);
+		q4.setQuestion(question);
+		q4.setLabels(labels);
+		q4.setInfo(info);
+		
+		questionRepository.save(q4);
+		
+		
 	}
 
 }
