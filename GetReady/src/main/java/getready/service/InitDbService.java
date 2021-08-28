@@ -33,8 +33,10 @@ public class InitDbService {
 	
 	@Transactional
 	public void addUser() {
-		AppUser user = new AppUser("admin", passwordEncoder.encode("adminpass"));
-		userRepository.save(user);
+		if(!userRepository.findByUsername("admin").isPresent()) {
+			AppUser user = new AppUser("admin", passwordEncoder.encode("adminpass"));
+			userRepository.save(user);
+		}
 		
 	}
 	
