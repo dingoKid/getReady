@@ -22,8 +22,8 @@ public class GetReadyApplication implements CommandLineRunner {
 
 		System.out.println("Starting...");
 		initDbService.addUser();
-		initDbService.addLabels();
-		initDbService.addQuestions();
+//		initDbService.addLabels();
+//		initDbService.addQuestions();
 		System.out.println("Added");
 		
 	}
