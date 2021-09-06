@@ -59,4 +59,6 @@ public class QuestionController {
 		if(labels.isEmpty()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empty label list!");
 		return questionMapper.questionToDto(questionService.findByLabels(labels));
 	}
+	
+	
 }
