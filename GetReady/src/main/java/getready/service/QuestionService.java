@@ -1,9 +1,10 @@
 package getready.service;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -43,7 +44,7 @@ public class QuestionService {
 	
 	@Transactional
 	public void saveQuestion(QuestionDto questionDto) {
-		List<Label> labels = new ArrayList<>();
+		Set<Label> labels = new HashSet<>();
 		
 		for (String labelName : questionDto.getLabels()) {
 			labels.add(labelRepository.findByName(labelName).get());
@@ -51,7 +52,16 @@ public class QuestionService {
 		
 		Question question = questionMapper.dtoToQuestion(questionDto);
 		question.setLabels(labels);		
-		questionRepository.save(question);
+		Optional<Question> existingQuestion = questionRepository.findByQuestion(questionDto.getQuestion());
+		if(existingQuestion.isPresent()) {
+			System.out.println("bent");
+			Question questionInDb = existingQuestion.get();
+			questionInDb.setAnswer(question.getAnswer());
+			questionInDb.setLabels(question.getLabels());
+			questionInDb.setInfo(question.getInfo());
+//			questionRepository.save(questionInDb);
+		} else 
+			questionRepository.save(question);
 	}
 	
 	public Question findByLabels(List<String> labelNames) {

@@ -1,7 +1,7 @@
 package getready.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,14 +24,14 @@ public class Question {
 	private String answer;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Label> labels;
+	private Set<Label> labels;
 	
 	@Column(columnDefinition = "TEXT")
 	private String info;
 	
 	public Question() {}
 	
-	public Question(String question, String answer, List<Label> labels) {
+	public Question(String question, String answer, Set<Label> labels) {
 		super();
 		this.question = question;
 		this.answer = answer;
@@ -62,13 +62,13 @@ public class Question {
 		this.answer = answer;
 	}
 
-	public List<Label> getLabels() {
+	public Set<Label> getLabels() {
 		if(labels == null)
-			labels = new ArrayList<>();
+			labels = new HashSet<>();
 		return labels;
 	}
 
-	public void setLabels(List<Label> labels) {
+	public void setLabels(Set<Label> labels) {
 		this.labels = labels;
 	}
 

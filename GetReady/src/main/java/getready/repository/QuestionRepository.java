@@ -1,6 +1,7 @@
 package getready.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -14,6 +15,8 @@ public interface QuestionRepository extends JpaRepository<Question, Long>, JpaSp
 	List<Long> getIds();
 
 	List<Question> findByQuestionContainingIgnoreCase(String word);
+	
+	Optional<Question> findByQuestion(String question);
 	
 
 }

@@ -1,6 +1,6 @@
 package getready.dto;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -14,7 +14,7 @@ public class QuestionDto {
 	private String answer;
 	
 	@NotEmpty
-	private List<String> labels;
+	private Set<String> labels;
 	
 	private String info;
 	
@@ -26,11 +26,11 @@ public class QuestionDto {
 		this.answer = answer;
 	}
 	
-	public List<String> getLabels() {
+	public Set<String> getLabels() {
 		return labels;
 	}
 	
-	public void setLabels(List<String> labels) {
+	public void setLabels(Set<String> labels) {
 		this.labels = labels;
 	}
 

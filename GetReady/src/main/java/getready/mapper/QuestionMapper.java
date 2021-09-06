@@ -1,6 +1,7 @@
 package getready.mapper;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.mapstruct.Mapper;
@@ -23,10 +24,10 @@ public interface QuestionMapper {
 	Question dtoToQuestion(QuestionDto dto);
 	
 	@Named("toStringList")
-	public static List<String> toStringList(List<Label> labelList) {
+	public static Set<String> toStringList(Set<Label> labelList) {
 		return labelList.stream()
 				.map(label -> label.getName())
-				.collect(Collectors.toList());
+				.collect(Collectors.toSet());
 	}
 
 	List<QuestionDto> questionsToDtos(List<Question> questions);

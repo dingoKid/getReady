@@ -1,7 +1,7 @@
 package getready.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -56,7 +56,7 @@ public class InitDbService {
 		String question = "What are the solid principles?";
 		String answer = "SRP, OCP, LSP, ISP, DIP.";
 		String info = "https://javatechonline.com/solid-principles-the-interface-segregation-principle/?fbclid=IwAR1Hc4-6k-XEDgzm0F3ky8RgAhg8NyjOQsth3at3danntIrqDsJObWIc95Y";
-		List<Label> labels = new ArrayList<>();
+		Set<Label> labels = new HashSet<>();
 		labels.add(labelRepository.findByName("OOP").get());		
 		q1.setQuestion(question);
 		q1.setAnswer(answer);
