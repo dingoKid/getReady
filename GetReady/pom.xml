@@ -72,7 +72,6 @@
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.5.10</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -96,7 +95,6 @@
 							<artifactId>mapstruct-processor</artifactId>
 							<version>${org.mapstruct.version}</version>
 						</path>
-						<!-- other annotation processors -->
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
