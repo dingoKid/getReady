@@ -25,10 +25,10 @@ public class QuestionController {
 
 	@Autowired
 	QuestionService questionService;
-	
+
 	@Autowired
 	QuestionMapper questionMapper;
-	
+
 	@GetMapping
 	public QuestionDto getQuestion() {
 		try {
@@ -38,7 +38,7 @@ public class QuestionController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Database is empty!");
 		}
 	}
-	
+
 	@PostMapping("/save")
 	public void saveQuestion(@RequestBody @Valid QuestionDto question) {
 		try {
@@ -47,18 +47,20 @@ public class QuestionController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Label not exist!");
 		}
 	}
-	
+
 	@GetMapping("/search/{word}")
 	public List<QuestionDto> searchByWord(@PathVariable String word) {
 		return questionMapper.questionsToDtos(questionService.findByContainingWord(word));
 	}
-	
-	
+
 	@PostMapping("/search")
 	public QuestionDto searchByLabels(@RequestBody List<String> labels) {
 		if(labels.isEmpty()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empty label list!");
-		return questionMapper.questionToDto(questionService.findByLabels(labels));
+		try {
+			return questionMapper.questionToDto(questionService.findByLabels(labels));
+		} catch (NoSuchElementException e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No question found with the specified label(s)");
+		}
 	}
-	
-	
+
 }

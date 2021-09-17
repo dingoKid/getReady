@@ -2,6 +2,7 @@ package getready.service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
@@ -74,6 +75,8 @@ public class QuestionService {
 		}
 		
 		List<Question> questionsWithCurrentLabels = questionRepository.findAll(spec);
+		if(questionsWithCurrentLabels.isEmpty())
+			throw new NoSuchElementException();
 		return getRandomQuestionFromList(questionsWithCurrentLabels);
 	}
 	
