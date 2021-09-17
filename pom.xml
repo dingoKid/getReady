@@ -16,6 +16,7 @@
 	<description>Application to help you learn</description>
 	<properties>
 		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+		<start-class>getready.GetReadyApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
