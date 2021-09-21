@@ -45,7 +45,7 @@ public class InitDbService {
 		labelRepository.save(new Label("OOP"));
 //		labelRepository.save(new Label("annotation"));
 		labelRepository.save(new Label("java"));
-		labelRepository.save(new Label("spring"));
+//		labelRepository.save(new Label("spring"));
 //		labelRepository.save(new Label("web"));
 	}
 	

@@ -33,9 +33,10 @@ public class QuestionService {
 	QuestionMapper questionMapper;
 	
 	public Question getRandomQuestion() {
-		List<Long> questionIds = questionRepository.getIds();
+		int questionsInDb = questionRepository.getNumberOfQuestions();
+		System.out.println(questionsInDb);
 		Random random = new Random();
-		Long randomId = random.longs( 1, questionIds.size() + 1 ).findFirst().getAsLong();
+		Long randomId = random.longs( 1, questionsInDb + 1 ).findFirst().getAsLong();
 		return questionRepository.findById(randomId).get();
 	}
 	
@@ -55,14 +56,15 @@ public class QuestionService {
 		question.setLabels(labels);		
 		Optional<Question> existingQuestion = questionRepository.findByQuestion(questionDto.getQuestion());
 		if(existingQuestion.isPresent()) {
-			System.out.println("bent");
 			Question questionInDb = existingQuestion.get();
 			questionInDb.setAnswer(question.getAnswer());
 			questionInDb.setLabels(question.getLabels());
 			questionInDb.setInfo(question.getInfo());
-//			questionRepository.save(questionInDb);
-		} else 
+			System.out.println("Modified");
+		} else {
 			questionRepository.save(question);
+			System.out.println("Saved");
+		}
 	}
 	
 	public Question findByLabels(List<String> labelNames) {
@@ -84,6 +86,14 @@ public class QuestionService {
 		Random random = new Random();
 		int randomIndex = random.ints( 0, list.size() ).findFirst().getAsInt();
 		return list.get(randomIndex);
+	}
+	
+	public void deleteQuestion(String question) {
+		Optional<Question> questionOpt = questionRepository.findByQuestion(question);
+		if(questionOpt.isPresent()) {			
+			Question questionInDb = questionOpt.get();
+			questionRepository.delete(questionInDb);
+		}
 	}
 	
 }

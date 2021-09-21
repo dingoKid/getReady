@@ -11,8 +11,8 @@ import getready.model.Question;
 
 public interface QuestionRepository extends JpaRepository<Question, Long>, JpaSpecificationExecutor<Question> {
 	
-	@Query("select id from Question")
-	List<Long> getIds();
+	@Query("select count(1) from Question")
+	int getNumberOfQuestions();
 
 	List<Question> findByQuestionContainingIgnoreCase(String word);
 	
