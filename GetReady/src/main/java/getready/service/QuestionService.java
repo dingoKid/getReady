@@ -34,7 +34,6 @@ public class QuestionService {
 	
 	public Question getRandomQuestion() {
 		int questionsInDb = questionRepository.getNumberOfQuestions();
-		System.out.println(questionsInDb);
 		Random random = new Random();
 		Long randomId = random.longs( 1, questionsInDb + 1 ).findFirst().getAsLong();
 		return questionRepository.findById(randomId).get();
