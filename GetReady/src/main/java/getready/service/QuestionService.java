@@ -10,6 +10,8 @@ import java.util.Set;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +37,9 @@ public class QuestionService {
 	public Question getRandomQuestion() {
 		int questionsInDb = questionRepository.getNumberOfQuestions();
 		Random random = new Random();
-		Long randomId = random.longs( 1, questionsInDb + 1 ).findFirst().getAsLong();
-		return questionRepository.findById(randomId).get();
+		Long randomId = random.longs( 0, questionsInDb ).findFirst().getAsLong();
+		Page<Question> result = questionRepository.findAll(PageRequest.of(randomId.intValue(), 1));
+		return result.getContent().get(0);
 	}
 	
 	public List<Question> findByContainingWord(String word) {
@@ -71,7 +74,7 @@ public class QuestionService {
 		
 		for (String labelName : labelNames) {
 			Optional<Label> label = labelRepository.findByName(labelName);
-			if(label.isPresent()) 
+			if(label.isPresent())
 				spec = spec.or(QuestionSpecifications.withLabel(label.get()));
 		}
 		
