@@ -90,12 +90,15 @@ public class QuestionService {
 		return list.get(randomIndex);
 	}
 	
+	@Transactional
 	public void deleteQuestion(String question) {
 		Optional<Question> questionOpt = questionRepository.findByQuestion(question);
 		if(questionOpt.isPresent()) {			
 			Question questionInDb = questionOpt.get();
 			questionRepository.delete(questionInDb);
-		}
+			System.out.println("Deleted");
+		} else
+			System.out.println("Question not found");
 	}
 	
 }

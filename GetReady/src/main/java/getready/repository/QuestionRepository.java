@@ -16,7 +16,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long>, JpaSp
 
 	List<Question> findByQuestionContainingIgnoreCase(String word);
 	
-	Optional<Question> findByQuestion(String question);
+	Optional<Question> findByQuestion(String questionString);
 	
 
 }
