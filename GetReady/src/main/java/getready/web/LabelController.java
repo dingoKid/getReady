@@ -29,7 +29,7 @@ public class LabelController {
 	
 	@GetMapping("/save/{labelName}")
 	public void addLabel(@PathVariable String labelName) {
-		if(labelName.isBlank())
+		if(labelName == null || labelName.isEmpty())
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		labelService.createLabel(labelName);		
 	}
