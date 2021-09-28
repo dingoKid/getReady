@@ -67,6 +67,8 @@ public class QuestionController {
 	
 	@DeleteMapping("/delete")
 	public void deleteQuestion(@RequestParam String question) {
+		if(question == null || question.isEmpty())
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		questionService.deleteQuestion(question);
 	}
 

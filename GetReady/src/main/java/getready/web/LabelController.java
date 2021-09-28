@@ -5,9 +5,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -32,6 +34,13 @@ public class LabelController {
 		if(labelName == null || labelName.isEmpty())
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		labelService.createLabel(labelName);		
+	}
+	
+	@DeleteMapping("/delete")
+	public void deleteLabel(@RequestParam String name) {
+		if(name == null || name.isEmpty())
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		labelService.deleteLabel(name);
 	}
 	
 }
